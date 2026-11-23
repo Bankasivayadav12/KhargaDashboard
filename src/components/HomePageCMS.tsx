@@ -59,14 +59,18 @@ export default function HomePageCMS({
           </div>
         </div>
 
-        {/* Home Section Switcher Pills */}
-        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-white dark:bg-[#0c0c12] border border-neutral-200 dark:border-neutral-800 shadow-xs max-w-full">
+        {/* Section Tabs (Pill Bar without any scrollbar) */}
+        <div
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-white dark:bg-[#0c0c12] border border-neutral-200 dark:border-neutral-800 shadow-xs max-w-full overflow-hidden [&::-webkit-scrollbar]:hidden"
+        >
           {SECTIONS.map((sec) => {
             const Icon = sec.icon;
             const isActive = activeSection === sec.id;
             return (
               <button
                 key={sec.id}
+                type="button"
                 onClick={() => setActiveSection(sec.id as any)}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   isActive

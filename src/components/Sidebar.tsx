@@ -19,6 +19,7 @@ import {
   ChevronRight,
   Users,
   X,
+  Sparkles,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -46,7 +47,8 @@ export default function Sidebar({
 
   const CMS_PAGES = [
     { id: 'cms-all', label: 'All Pages Directory', icon: Files },
-    { id: 'cms-home', label: 'Home Page', icon: Home, badge: '4' },
+    { id: 'cms-home', label: 'Home Page', icon: Home, badge: 'Hero' },
+    { id: 'cms-why-choose', label: 'Why Choose Us', icon: Sparkles, badge: counts?.whyChoose || 8 },
     { id: 'cms-about', label: 'About Us', icon: Info },
     { id: 'cms-services', label: 'Services', icon: Layers, badge: counts?.services || 11 },
     { id: 'cms-portfolio', label: 'Portfolio', icon: FolderKanban, badge: counts?.ourWork || 15 },
@@ -310,7 +312,6 @@ export default function Sidebar({
             </div>
           </div>
         </div>
-
         {/* Footer */}
       </aside>
     </>

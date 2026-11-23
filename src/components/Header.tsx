@@ -39,6 +39,7 @@ interface HeaderProps {
 const CMS_PAGES_LIST = [
   { id: 'cms-all', label: 'All Pages Directory', icon: Files },
   { id: 'cms-home', label: 'Home Page', icon: Home },
+  { id: 'cms-why-choose', label: 'Why Choose Us', icon: Sparkles },
   { id: 'cms-about', label: 'About Us', icon: Info },
   { id: 'cms-services', label: 'Services', icon: Layers },
   { id: 'cms-portfolio', label: 'Portfolio', icon: FolderKanban },

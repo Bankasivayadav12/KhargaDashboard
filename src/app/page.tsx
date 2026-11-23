@@ -14,6 +14,7 @@ import BlogCMS from '@/components/BlogCMS';
 import CareerCMS from '@/components/CareerCMS';
 import ClientsCMS from '@/components/ClientsCMS';
 import SettingsCMS from '@/components/SettingsCMS';
+import WhyChooseCMS from '@/components/WhyChooseCMS';
 import {
   initialHeroData,
   initialServicesData,
@@ -301,7 +302,7 @@ export default function DashboardPage() {
               services={services}
               whyChoose={whyChoose}
               ourWork={ourWork}
-              setActiveTab={(view) => setActiveView(view === 'hero' || view === 'services' || view === 'why-choose' || view === 'our-work' ? 'cms-home' : view)}
+              setActiveTab={(view) => setActiveView(view === 'hero' ? 'cms-home' : view === 'services' ? 'cms-services' : view === 'why-choose' ? 'cms-why-choose' : view === 'our-work' ? 'cms-portfolio' : view)}
               onSeed={handleSeedDatabase}
             />
           )}
@@ -333,6 +334,19 @@ export default function DashboardPage() {
               onUpdateOurWork={handleUpdateOurWork}
               onBackToPages={() => setActiveView('cms-all')}
             />
+          )}
+
+          {activeView === 'cms-why-choose' && (
+            <div className="max-w-6xl space-y-6">
+              <button
+                type="button"
+                onClick={() => setActiveView('cms-all')}
+                className="text-xs text-[#B8860B] dark:text-[#D4AF37] font-bold hover:underline mb-2 cursor-pointer"
+              >
+                ← Back to All Pages Directory
+              </button>
+              <WhyChooseCMS items={whyChoose} onUpdate={handleUpdateWhyChoose} />
+            </div>
           )}
 
           {activeView === 'cms-services' && (
