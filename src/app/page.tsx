@@ -40,7 +40,7 @@ export default function DashboardPage() {
   const [careers, setCareers] = useState<any[]>(initialCareersData);
   const [clients, setClients] = useState<any[]>(initialClientsData);
   const [isSeeding, setIsSeeding] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isSyncing, setIsSyncing] = useState(true);
 
   // Sync dark class with document element
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function DashboardPage() {
     } catch (e) {
       console.error('Failed to load CMS data', e);
     } finally {
-      setLoading(false);
+      setIsSyncing(false);
     }
   };
 
@@ -247,21 +247,12 @@ export default function DashboardPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="w-full h-screen bg-[#edf1f7] dark:bg-[#08090f] flex items-center justify-center transition-colors">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-3 border-[#D4AF37] border-t-transparent rounded-full animate-spin" />
-          <span className="text-xs font-mono font-bold tracking-widest text-[#B8860B] dark:text-[#D4AF37] uppercase">
-            Loading Kharga CMS...
-          </span>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="h-screen max-h-screen bg-[#edf1f7] dark:bg-[#08090f] flex text-[#0f172a] dark:text-[#f8fafc] font-sans antialiased overflow-hidden transition-colors duration-250 relative">
+      {/* Subtle top background sync indicator instead of full-screen blocker */}
+      {isSyncing && (
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent animate-pulse z-50 pointer-events-none" />
+      )}
       <Sidebar
         activeView={activeView}
         setActiveView={setActiveView}

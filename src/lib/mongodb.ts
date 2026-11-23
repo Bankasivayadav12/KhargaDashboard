@@ -16,7 +16,10 @@ declare global {
 }
 
 if (!global._mongoClient) {
-  global._mongoClient = new MongoClient(uri);
+  global._mongoClient = new MongoClient(uri, {
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000,
+  });
 }
 client = global._mongoClient;
 
@@ -52,6 +55,8 @@ export async function connectToDatabase(): Promise<{ success: boolean; connectio
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
     };
     cached.promise = mongoose.connect(uri, opts).then((mongooseInstance) => {
       return mongooseInstance;
