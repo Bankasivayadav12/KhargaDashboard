@@ -28,6 +28,7 @@ export default function DashboardPage() {
   const [activeView, setActiveView] = useState('overview');
   const [homeSection, setHomeSection] = useState('hero');
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [dbStatus, setDbStatus] = useState<any>(null);
   const [heroData, setHeroData] = useState<any>(initialHeroData);
@@ -259,7 +260,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="h-screen max-h-screen bg-[#edf1f7] dark:bg-[#08090f] flex text-[#0f172a] dark:text-[#f8fafc] font-sans antialiased overflow-hidden transition-colors duration-250">
+    <div className="h-screen max-h-screen bg-[#edf1f7] dark:bg-[#08090f] flex text-[#0f172a] dark:text-[#f8fafc] font-sans antialiased overflow-hidden transition-colors duration-250 relative">
       <Sidebar
         activeView={activeView}
         setActiveView={setActiveView}
@@ -275,6 +276,8 @@ export default function DashboardPage() {
         }}
         isCollapsed={isCollapsed}
         setIsCollapsed={setIsCollapsed}
+        isMobileOpen={isMobileOpen}
+        setIsMobileOpen={setIsMobileOpen}
       />
 
       <div className="flex-1 flex flex-col min-w-0 h-screen max-h-screen overflow-hidden transition-all duration-300">
@@ -286,9 +289,11 @@ export default function DashboardPage() {
           activeView={activeView}
           setActiveView={setActiveView}
           onNavigateSettings={() => setActiveView('settings')}
+          isMobileOpen={isMobileOpen}
+          setIsMobileOpen={setIsMobileOpen}
         />
 
-        <main className="flex-1 p-6 sm:p-8 lg:p-10 overflow-y-auto">
+        <main className="flex-1 p-3.5 sm:p-6 lg:p-8 overflow-y-auto">
           {activeView === 'overview' && (
             <OverviewCMS
               dbStatus={dbStatus}

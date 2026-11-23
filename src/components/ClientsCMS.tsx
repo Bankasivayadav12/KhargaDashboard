@@ -353,7 +353,7 @@ export default function ClientsCMS({
       </div>
 
       {/* Category Pills */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+      <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar scrollbar-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {CATEGORIES.map((cat) => {
           const isActive = selectedCategory === cat;
           return (
@@ -391,7 +391,7 @@ export default function ClientsCMS({
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {filteredClients.map((client) => {
             const IconComponent = LOGO_ICONS[client.logoSvg] || Sparkles;
             const isLive = client.isPublished !== false;
@@ -511,29 +511,29 @@ export default function ClientsCMS({
 
       {/* Create / Edit Modal Dialog */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-[#0c0e17] rounded-3xl border border-[#dbe0ea] dark:border-[#1e2333] max-w-4xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150 my-8">
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-white dark:bg-[#0c0e17] rounded-2xl sm:rounded-3xl border border-[#dbe0ea] dark:border-[#1e2333] max-w-4xl w-full max-h-[90vh] flex flex-col p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150 my-auto overflow-hidden">
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-[#dbe0ea] dark:border-[#1e2333] pb-4">
+            <div className="flex items-center justify-between border-b border-[#dbe0ea] dark:border-[#1e2333] pb-3 sm:pb-4 shrink-0">
               <div>
                 <span className="text-[10px] font-mono font-bold tracking-widest text-[#B8860B] dark:text-[#D4AF37] uppercase">
                   {isCreating ? 'CREATE NEW PARTNERSHIP' : 'EDIT CLIENT DETAILS'}
                 </span>
-                <h3 className="text-xl font-black text-[#0f172a] dark:text-white">
-                  {isCreating ? 'Add Client to MongoDB Atlas' : `Edit "${formData.clientName}"`}
+                <h3 className="text-base sm:text-xl font-black text-[#0f172a] dark:text-white truncate">
+                  {isCreating ? 'Add Client to Database' : `Edit "${formData.clientName}"`}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="p-2 rounded-xl text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#151928] transition-colors cursor-pointer"
+                className="p-1.5 sm:p-2 rounded-xl text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#151928] transition-colors cursor-pointer shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Modal Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 overflow-y-auto flex-1 pr-1">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Left Column: Form Fields */}
                 <div className="space-y-4">

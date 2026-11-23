@@ -153,7 +153,7 @@ export default function AboutCMS({ onBack }: AboutCMSProps) {
       </div>
 
       {/* Tabs Switcher: Narrative vs Meet Our Team */}
-      <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-[#f1f5f9] dark:bg-[#121624] border border-[#dbe0ea] dark:border-[#1e2333] w-fit">
+      <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-[#f1f5f9] dark:bg-[#121624] border border-[#dbe0ea] dark:border-[#1e2333] w-fit max-w-full overflow-x-auto no-scrollbar scrollbar-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <button
           type="button"
           onClick={() => setActiveTab('team')}
@@ -359,25 +359,25 @@ export default function AboutCMS({ onBack }: AboutCMSProps) {
 
       {/* Edit / Add Team Member Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-white dark:bg-[#10131d] rounded-3xl border border-[#dbe0ea] dark:border-[#22293e] shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div className="px-6 py-4 border-b border-[#e2e8f0] dark:border-[#1e2333] flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-[#B8860B] dark:text-[#D4AF37]" />
-                <h3 className="text-base font-black text-[#0f172a] dark:text-white">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="w-full max-w-lg max-h-[90vh] bg-white dark:bg-[#10131d] rounded-2xl sm:rounded-3xl border border-[#dbe0ea] dark:border-[#22293e] shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150 my-auto">
+            <div className="px-5 py-3.5 sm:px-6 sm:py-4 border-b border-[#e2e8f0] dark:border-[#1e2333] flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <Users className="w-4 h-4 text-[#B8860B] dark:text-[#D4AF37] shrink-0" />
+                <h3 className="text-sm sm:text-base font-black text-[#0f172a] dark:text-white truncate">
                   {isCreating ? 'Add New Team Member' : 'Edit Team Member: ' + memberForm.name}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="p-1.5 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-500 cursor-pointer"
+                className="p-1.5 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-500 cursor-pointer shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleSaveMember} className="p-6 space-y-4 text-xs">
+            <form onSubmit={handleSaveMember} className="p-4 sm:p-6 space-y-4 text-xs overflow-y-auto flex-1">
               <div className="space-y-1">
                 <label className="font-bold text-[#0f172a] dark:text-white">Full Name</label>
                 <input
@@ -404,7 +404,7 @@ export default function AboutCMS({ onBack }: AboutCMSProps) {
 
               <div className="space-y-1">
                 <label className="font-bold text-[#0f172a] dark:text-white">Photo URL or Path</label>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
                   <input
                     type="text"
                     required
@@ -412,7 +412,7 @@ export default function AboutCMS({ onBack }: AboutCMSProps) {
                     onChange={(e) => setMemberForm({ ...memberForm, photo: e.target.value })}
                     className="flex-1 p-2.5 rounded-xl bg-[#f8fafc] dark:bg-[#151928] border border-[#dbe0ea] dark:border-[#22293e] text-[#0f172a] dark:text-white font-mono focus:border-[#D4AF37] focus:outline-none"
                   />
-                  <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-[#dbe0ea] dark:border-[#22293e] shrink-0 bg-neutral-200">
+                  <div className="relative w-full sm:w-12 h-20 sm:h-12 rounded-xl overflow-hidden border border-[#dbe0ea] dark:border-[#22293e] shrink-0 bg-neutral-200">
                     {memberForm.photo ? (
                       <Image src={memberForm.photo} alt="Preview" fill className="object-cover" />
                     ) : null}

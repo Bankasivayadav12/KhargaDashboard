@@ -23,7 +23,7 @@ export default function SettingsCMS({ dbStatus, onRefresh, onSeed, isSeeding }: 
       </div>
 
       {/* MongoDB Atlas Setup Guide */}
-      <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#0c0c12] border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-5 transition-colors">
+      <div className="p-4 sm:p-7 rounded-2xl sm:rounded-3xl bg-white dark:bg-[#0c0c12] border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-5 transition-colors">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-[#B8860B] dark:text-[#D4AF37] flex items-center justify-center">
             <Key className="w-5 h-5" />
@@ -48,10 +48,10 @@ export default function SettingsCMS({ dbStatus, onRefresh, onSeed, isSeeding }: 
           <p>4. Click <strong>Test Connection &amp; Sync</strong> below to verify connection and populate your collections.</p>
         </div>
 
-        <div className="pt-2 flex flex-wrap gap-3">
+        <div className="pt-2 flex flex-col sm:flex-row flex-wrap gap-3">
           <button
             onClick={onRefresh}
-            className="px-5 py-2.5 rounded-xl bg-white dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 text-xs font-bold text-neutral-900 dark:text-white flex items-center gap-2 transition-all shadow-xs cursor-pointer"
+            className="w-full sm:w-auto justify-center px-5 py-2.5 rounded-xl bg-white dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 text-xs font-bold text-neutral-900 dark:text-white flex items-center gap-2 transition-all shadow-xs cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Test Connection Health</span>
@@ -60,7 +60,7 @@ export default function SettingsCMS({ dbStatus, onRefresh, onSeed, isSeeding }: 
           <button
             onClick={onSeed}
             disabled={isSeeding}
-            className="px-5 py-2.5 rounded-xl bg-[#D4AF37] hover:bg-[#e4be3e] text-neutral-950 text-xs font-black uppercase tracking-wider transition-all shadow-md flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+            className="w-full sm:w-auto justify-center px-5 py-2.5 rounded-xl bg-[#D4AF37] hover:bg-[#e4be3e] text-neutral-950 text-xs font-black uppercase tracking-wider transition-all shadow-md flex items-center gap-2 disabled:opacity-50 cursor-pointer"
           >
             <Database className="w-3.5 h-3.5" />
             <span>{isSeeding ? 'Syncing...' : 'Sync Live Website Data to Atlas'}</span>

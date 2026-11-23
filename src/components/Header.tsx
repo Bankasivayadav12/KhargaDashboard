@@ -21,6 +21,7 @@ import {
   Briefcase,
   Mail,
   Check,
+  Menu,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -31,6 +32,8 @@ interface HeaderProps {
   activeView: string;
   setActiveView: (view: string) => void;
   onNavigateSettings: () => void;
+  isMobileOpen?: boolean;
+  setIsMobileOpen?: (open: boolean | ((prev: boolean) => boolean)) => void;
 }
 
 const CMS_PAGES_LIST = [
@@ -52,6 +55,8 @@ export default function Header({
   activeView,
   setActiveView,
   onNavigateSettings,
+  isMobileOpen = false,
+  setIsMobileOpen,
 }: HeaderProps) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCmsMenuOpen, setIsCmsMenuOpen] = useState(false);
@@ -74,24 +79,35 @@ export default function Header({
   const activePageObj = CMS_PAGES_LIST.find((p) => p.id === activeView);
 
   return (
-    <header className="sticky top-0 z-40 w-full h-18 bg-white/95 dark:bg-[#0c0e17]/95 backdrop-blur-xl border-b border-[#dbe0ea] dark:border-[#1a1e2d] px-4 sm:px-8 flex items-center justify-between transition-colors duration-200 shadow-xs">
-      {/* Left: Collapse Toggle, Title & CMS Dropdown */}
-      <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+    <header className="sticky top-0 z-40 w-full h-16 sm:h-18 bg-white/95 dark:bg-[#0c0e17]/95 backdrop-blur-xl border-b border-[#dbe0ea] dark:border-[#1a1e2d] px-3.5 sm:px-6 lg:px-8 flex items-center justify-between transition-colors duration-200 shadow-xs">
+      {/* Left: Mobile Menu / Collapse Toggle, Title & CMS Dropdown */}
+      <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
         <button
           type="button"
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-2.5 rounded-xl bg-[#f1f5f9] dark:bg-[#151928] hover:bg-[#e2e8f0] dark:hover:bg-[#1e2438] border border-[#dbe0ea] dark:border-[#22293e] text-[#475569] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-white transition-all cursor-pointer shadow-xs active:scale-95 shrink-0"
-          title={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+          onClick={() => {
+            if (setIsMobileOpen && window.innerWidth < 1024) {
+              setIsMobileOpen((prev) => !prev);
+            } else {
+              setIsCollapsed((prev) => !prev);
+            }
+          }}
+          className="p-2 sm:p-2.5 rounded-xl bg-[#f1f5f9] dark:bg-[#151928] hover:bg-[#e2e8f0] dark:hover:bg-[#1e2438] border border-[#dbe0ea] dark:border-[#22293e] text-[#475569] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-white transition-all cursor-pointer shadow-xs active:scale-95 shrink-0"
+          title="Toggle Navigation Menu"
         >
-          {isCollapsed ? <PanelLeftOpen className="w-4 h-4 text-[#B8860B] dark:text-[#D4AF37]" /> : <PanelLeftClose className="w-4 h-4" />}
+          <span className="lg:hidden flex items-center justify-center">
+            <Menu className="w-4 h-4 text-[#B8860B] dark:text-[#D4AF37]" />
+          </span>
+          <span className="hidden lg:flex items-center justify-center">
+            {isCollapsed ? <PanelLeftOpen className="w-4 h-4 text-[#B8860B] dark:text-[#D4AF37]" /> : <PanelLeftClose className="w-4 h-4" />}
+          </span>
         </button>
 
         <div className="flex flex-col min-w-0">
-          <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#B8860B] dark:text-[#D4AF37] font-extrabold flex items-center gap-1.5 truncate">
-            <Sparkles className="w-3 h-3 shrink-0" />
+          <span className="text-[9px] sm:text-xs uppercase tracking-widest text-[#B8860B] dark:text-[#D4AF37] font-extrabold flex items-center gap-1.5 truncate">
+            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" />
             <span className="truncate">Kharga CMS Studio</span>
           </span>
-          <h1 className="text-sm sm:text-base lg:text-lg font-black text-[#0f172a] dark:text-white tracking-tight truncate">
+          <h1 className="text-xs sm:text-base lg:text-lg font-black text-[#0f172a] dark:text-white tracking-tight truncate max-w-[140px] xs:max-w-[220px] sm:max-w-none">
             Content Management System
           </h1>
         </div>
@@ -208,7 +224,7 @@ export default function Header({
 
           {/* Floating Dropdown Card */}
           {isProfileOpen && (
-            <div className="absolute right-0 mt-3 w-64 rounded-2xl bg-white dark:bg-[#121624] border border-[#dbe0ea] dark:border-[#22293e] shadow-[0_20px_50px_rgba(15,23,42,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)] p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+            <div className="absolute right-0 mt-3 w-64 max-w-[calc(100vw-1.5rem)] rounded-2xl bg-white dark:bg-[#121624] border border-[#dbe0ea] dark:border-[#22293e] shadow-[0_20px_50px_rgba(15,23,42,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)] p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
               <div className="p-3 border-b border-[#e2e8f0] dark:border-[#1e2333] flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-[#D4AF37] p-0.5 shrink-0">
                   <div className="w-full h-full rounded-[10px] bg-[#0c0e17] flex items-center justify-center text-white font-black text-xs">

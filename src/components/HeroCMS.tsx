@@ -42,7 +42,7 @@ export default function HeroCMS({ initialData, onSave }: HeroCMSProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Form Controls */}
-        <form onSubmit={handleSubmit} className="lg:col-span-7 space-y-5 bg-white dark:bg-[#0c0c12] p-6 sm:p-7 rounded-3xl border border-neutral-200 dark:border-neutral-800 shadow-sm transition-colors">
+        <form onSubmit={handleSubmit} className="lg:col-span-7 space-y-4 sm:space-y-5 bg-white dark:bg-[#0c0c12] p-4 sm:p-7 rounded-2xl sm:rounded-3xl border border-neutral-200 dark:border-neutral-800 shadow-sm transition-colors">
           <div>
             <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 uppercase tracking-wider mb-2">
               Main Headline (Supports Newlines)
@@ -82,7 +82,7 @@ export default function HeroCMS({ initialData, onSave }: HeroCMSProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 uppercase tracking-wider mb-2">
                 CTA Button Text
